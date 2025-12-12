@@ -1,8 +1,21 @@
+# Kibana Configuration File
+# This file configures Kibana settings and is required for alerting features
+
+# Basic Kibana Server Configuration
 server.host: "0.0.0.0"
 server.shutdownTimeout: "5s"
 elasticsearch.hosts: ["http://elasticsearch:9200"]
 monitoring.ui.container.elasticsearch.enabled: true
 
+# Encryption Keys for Alerting and Saved Objects
+# These keys are REQUIRED for creating alerts, rules, and connectors in Kibana
+# Without these keys, you'll see "Additional setup required" error when trying to create rules
+
+# To generate a random 32-character encryption key, run this PowerShell command:
+# -join ((48..57) + (65..90) + (97..122) | Get-Random -Count 32 | ForEach-Object {[char]$_})
+# Then replace "YOUR_KEY_HERE" below with the generated key (use the same key for all three)
+
 xpack.encryptedSavedObjects.encryptionKey: "YOUR_KEY_HERE"
 xpack.reporting.encryptionKey: "YOUR_KEY_HERE"
+
 xpack.security.encryptionKey: "YOUR_KEY_HERE"
